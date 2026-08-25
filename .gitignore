@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+venv/
+.venv/
+*.pt
+sample_data/*.mp4
+output_annotated.mp4
+speed_log.csv
+*_speed_log.csv
+.ipynb_checkpoints/
+.DS_Store
+.env
