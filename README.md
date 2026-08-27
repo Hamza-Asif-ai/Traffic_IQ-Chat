@@ -1,9 +1,47 @@
-# TrafficIQ Chat — Vehicle Counting, Speed Estimation & Conversational Traffic Analytics
+<div align="center">
 
-YOLOv8 (detection) + DeepSORT (multi-object tracking) + Streamlit (live dashboard) + Groq (LLM chatbot).
-Detects vehicles in video, assigns persistent IDs, counts vehicles crossing a line
-(separately by direction), estimates each vehicle's speed in km/h, and lets you ask
-plain-English questions about the results.
+# 🚦 TrafficIQ Chat
+
+**Vehicle Counting, Speed Estimation & Conversational Traffic Analytics**
+
+[![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-purple)](https://github.com/ultralytics/ultralytics)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Dashboard-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Groq](https://img.shields.io/badge/LLM-Groq-orange)](https://groq.com/)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)](#)
+
+A computer-vision pipeline that watches traffic video and turns it into
+structured, queryable data — detection, tracking, speed, and directional
+counts, plus a built-in chatbot to ask about the results in plain English
+or Roman Urdu.
+
+</div>
+
+---
+
+### ✨ Features
+- 🚗 **Vehicle detection** — YOLOv8, filtered to car / motorcycle / bus / truck
+- 🔗 **Persistent tracking** — DeepSORT keeps a stable ID per vehicle across frames
+- 📏 **Speed estimation** — real-world km/h from a one-time pixel calibration
+- ↔️ **Directional counting** — incoming vs. outgoing traffic, tracked separately
+- 📊 **Live dashboard** — Streamlit app with charts, CSV export, and annotated video
+- 💬 **LLM chatbot** — ask questions about the results in plain English *or* Roman Urdu, answered via a safe text-to-pandas pipeline (no hallucinated numbers)
+- 📓 **Three ways to run it** — Streamlit app, CLI script, or a walkthrough notebook — all sharing one codebase
+
+### 📚 Table of contents
+- [Project structure](#project-structure)
+- [Setup](#setup)
+- [Three ways to run this](#three-ways-to-run-this)
+- [How it works](#how-it-works)
+- [Directional counting](#directional-counting-both-carriageways-separately)
+- [Calibration tips](#calibration-tips)
+- [Known limitations](#known-limitations)
+- [Troubleshooting](#troubleshooting-unrealistic-results)
+- [💬 Chatbot: ask your traffic data questions](#-bonus-feature-ask-your-traffic-data-questions-llm-chatbot)
+- [Possible extensions](#possible-extensions-good-future-work-talking-points-in-interviews)
+- [Resume bullet](#resume-bullet)
+
+---
 
 ## Project structure
 ```
@@ -27,6 +65,8 @@ trafficiq-chat/
 
 All three entry points (`app.py`, `process_video.py`, the notebook) reuse the
 exact same `modules/` code — one pipeline, three ways to run it.
+
+---
 
 ## Setup
 ```bash
@@ -72,6 +112,8 @@ step with explanations, previews your first frame so you can pick a good
 counting-line position, and produces the same annotated output video +
 charts inline. Good for demoing the project or exploring/tweaking things
 interactively.
+
+---
 
 ## How it works
 1. **Detection** — Each frame is passed to YOLOv8, filtered to vehicle classes
@@ -145,6 +187,8 @@ camera angle) — honest results, not just theory:
   perspective correction listed under "Possible extensions" below is the
   standard way production systems solve this properly.
 
+---
+
 ## Troubleshooting: unrealistic results
 - **Speeds look way too low/high:** your calibration is off. Re-check it with
   `calibration_helper.py` and measure near the counting line, not far from it.
@@ -157,6 +201,8 @@ camera angle) — honest results, not just theory:
   the top 40% of the frame. Leave it at `0` for footage without a distant
   horizon cluster. Raising `conf_threshold` and `tracker.py`'s `max_age`
   (already tuned to 60) can help marginally too, but don't rely on them alone.
+
+---
 
 ## 💬 Bonus feature: Ask your traffic data questions (LLM chatbot)
 
@@ -201,6 +247,8 @@ Get a free API key at https://console.groq.com/keys
 - In the notebook: import `modules.chatbot` and call
   `chatbot.ask("your question", vehicle_summary_df)`.
 
+---
+
 ## Possible extensions (good "future work" talking points in interviews)
 - Homography-based perspective correction for angled camera views
 - Per-lane speed limit violation alerts
@@ -208,9 +256,19 @@ Get a free API key at https://console.groq.com/keys
 - Swap DeepSORT for ByteTrack (lighter, no re-ID embedding needed)
 - Deploy on edge devices via ONNX/TensorRT export for higher FPS
 
+---
+
 ## Resume bullet
 > Built a real-time vehicle counting and speed estimation system using YOLOv8
 > and DeepSORT; deployed via Streamlit with a live analytics dashboard
 > (per-vehicle speed tracking, CSV export, average speed by vehicle type) and
 > a natural-language Q&A feature powered by an LLM (Groq), using a safe text-to-pandas
 > pipeline for accurate, hallucination-free answers about the traffic data.
+
+<div align="center">
+
+---
+
+Built by **Hamza Asif** · [GitHub](https://github.com/hamza93-ai)
+
+</div>
