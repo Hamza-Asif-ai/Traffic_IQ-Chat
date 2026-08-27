@@ -8,7 +8,6 @@
 [![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-purple)](https://github.com/ultralytics/ultralytics)
 [![Streamlit](https://img.shields.io/badge/Streamlit-Live%20Dashboard-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Groq](https://img.shields.io/badge/LLM-Groq-orange)](https://groq.com/)
-[![License](https://img.shields.io/badge/license-MIT-lightgrey)](#)
 
 A computer-vision pipeline that watches traffic video and turns it into
 structured, queryable data — detection, tracking, speed, and directional
